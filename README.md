@@ -25,7 +25,7 @@ All data access runs through `GC.load` / `GC.api` in `assets/app.js`;
 see `INTEGRATION.md` for the single swap point that will point those
 functions at the forthcoming D1-backed API without page changes.
 
-Framework code and gold standard: https://github.com/yuye8848/guidecensus
+Framework code and gold standard: https://github.com/guidecensus/guidecensus
 Protocol and amendments: OSF 10.17605/OSF.IO/9VMFJ
 
 Licences: data & documentation CC-BY-4.0; site code MIT.
