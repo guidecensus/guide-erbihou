@@ -10,13 +10,13 @@
 <body data-layer="l5">
 <main>
   <p class="tag" data-en="Layer 5 · Zombie watch" data-zh="第五层 · 僵尸观察">Layer 5 · Zombie watch</p>
-  <h1 data-en="Withdrawn studies that still carry recommendations" data-zh="仍在撑着推荐的已撤回研究">Withdrawn studies that still carry recommendations</h1>
-  <p class="lede" data-en="A zombie citation is a study that had already been withdrawn or retracted when the guideline citing it was published — yet still sits in its reference list, in two cases as the pivotal study of a current recommendation. Three strata were screened separately and are never pooled; one earlier zombie determination was itself withdrawn during remediation, and that correction is part of the record below."
-     data-zh="僵尸引文，是在引用它的指南出版之时就已经被撤回或撤稿的研究——却仍然躺在参考文献表里，其中两例还是现行推荐的关键研究。三个分层分别筛查、永不合并；整改期间有一例早先的僵尸认定本身被撤销，这条更正也是下方记录的一部分。">A zombie citation is a study already withdrawn or retracted when the citing guideline was published.</p>
+  <h1 data-en="Zombie citations, adjudicated at the cited version" data-zh="僵尸引文：按被引版本裁定">Zombie citations, adjudicated at the cited version</h1>
+  <p class="lede" data-en="A zombie citation is a study that had already been withdrawn or retracted when the guideline citing it was published — yet still sits in its reference list. Screened at the level of the exact version each guideline cites, no current pivotal study is a confirmed zombie: the two determinations the frozen screen had counted attach to withdrawn updated versions that the guidelines never cited, and both were withdrawn under Amendment v2.7 (2026-11-15). Three strata were screened separately and are never pooled; every withdrawn determination is part of the record below."
+     data-zh="僵尸引文，是在引用它的指南出版之时就已经被撤回或撤稿的研究——却仍然躺在参考文献表里。按指南实际引用的确切版本筛查，现行关键研究中确认的僵尸为 0：冻结筛查曾计得的两例认定，附着于指南从未引用的已撤回更新版，已于 2026 年 11 月 15 日依修正案 v2.7 撤销。三个分层分别筛查、永不合并；每一例被撤销的认定都是下方记录的一部分。">A zombie citation is a study already withdrawn or retracted when the citing guideline was published; adjudicated at the cited version, no current pivotal study is a confirmed zombie.</p>
   <div id="zombie-list"></div>
   <h2 data-en="Screening denominators" data-zh="筛查分母">Screening denominators</h2>
   <div id="screen"></div>
-  <div class="note" data-en="Determinations attach to the exact bibliographic version a guideline cites: a later update of the same review being withdrawn does not make the cited earlier version a zombie — the rule that removed one false positive below during the v2.5 remediation." data-zh="认定只附着于指南实际引用的那个确切文献版本：同一综述的后续更新版被撤回，不使被引用的早期版成为僵尸——正是这条规则在 v2.5 整改中移除了下方一例假阳性。">Determinations attach to the exact bibliographic version cited.</div>
+  <div class="note" data-en="Determinations attach to the exact bibliographic version a guideline cites: a later update of the same review being withdrawn does not make the cited earlier version a zombie — the rule that removed one false positive below during the v2.5 remediation, and two more under Amendment v2.7 (2026-11-15), which applied the rule uniformly to the whole screen." data-zh="认定只附着于指南实际引用的那个确切文献版本：同一综述的后续更新版被撤回，不使被引用的早期版成为僵尸——正是这条规则在 v2.5 整改中移除了下方一例假阳性，又于 2026 年 11 月 15 日修正案 v2.7 中统一适用于全筛查后移除了另两例。">Determinations attach to the exact bibliographic version cited.</div>
 </main>
 <script>
 var Z = null;
@@ -46,9 +46,13 @@ function render() {
     h += '<div class="warnbox"><b>' + GC.t('Determination withdrawn during remediation: ', '整改期间撤销的认定：') + '</b>' +
       GC.esc(z.rec) + ' (PMID ' + GC.esc(z.pmid) + ') — ' + GC.esc(z.reason) + '</div>';
   });
+  (Z.removed_v27 || []).forEach(function (z) {
+    h += '<div class="warnbox"><b>' + GC.t('Determination withdrawn under Amendment v2.7 (2026-11-15): ', '依修正案 v2.7 撤销的认定（2026-11-15）：') + '</b>' +
+      GC.esc(z.rec) + ' (PMID ' + GC.esc(z.pmid) + ') — ' + GC.esc(z.reason) + '</div>';
+  });
   document.getElementById('zombie-list').innerHTML = h;
   document.getElementById('screen').innerHTML = '<table><tbody>' +
-    '<tr><th>' + GC.t('Stratum (b): unique current pivotals screened', '分层（b)：筛查的现行关键研究（独立 PMID）') + '</th><td class="num">' + Z.stratum_b_screened + '</td><td>' + GC.t(Z.stratum_b.length + ' zombie pivotals (above); a further 25 pivotal identities could not be resolved and are reported as unresolved, never guessed', '上列 ' + Z.stratum_b.length + ' 例僵尸关键研究；另有 25 例关键研究身份无法定出，按未决报告，绝不猜测') + '</td></tr>' +
+    '<tr><th>' + GC.t('Stratum (b): unique current pivotals screened', '分层（b)：筛查的现行关键研究（独立 PMID）') + '</th><td class="num">' + Z.stratum_b_screened + '</td><td>' + GC.t(Z.stratum_b.length + ' zombie pivotals confirmed at cited-version level; a further 25 pivotal identities could not be resolved and are reported as unresolved, never guessed', '按被引版本口径确认僵尸关键研究 ' + Z.stratum_b.length + ' 例；另有 25 例关键研究身份无法定出，按未决报告，绝不猜测') + '</td></tr>' +
     '<tr><th>' + GC.t('Stratum (a): citations persistent across versions', '分层（a)：跨版本存续的引文') + '</th><td class="num">' + Z.stratum_a.screened.toLocaleString() + '</td><td>' + GC.t(Z.stratum_a.zombies + ' zombies', Z.stratum_a.zombies + ' 例僵尸') + '</td></tr>' +
     '<tr><th>' + GC.t('Stratum (c): flagged attachments (above)', '分层（c)：被标记附件（见上）') + '</th><td class="num">' + Z.stratum_c.length + '</td><td>' + GC.t('1 retracted + 1 expression of concern (not a zombie)', '1 例撤稿 + 1 例关注声明（非僵尸）') + '</td></tr>' +
     '</tbody></table><p class="small muted">' + GC.t('Source: ', '来源：') + GC.esc(Z.source) + '</p>';
