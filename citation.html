@@ -53,7 +53,7 @@ function render(res) {
   var k = function (v, label) { return '<div class="kpi"><div class="v">' + v + '</div><div class="k">' + label + '</div></div>'; };
   tiles.innerHTML = '<div class="kpis">' +
     k(res.counts.cites, GC.t('recommendations cite this study', '条推荐引用了本研究')) +
-    k(res.counts.pivotal, GC.t('of them rest on it as their pivotal study', '条以它为关键研究')) +
+    k(res.counts.pivotal, GC.t('of them rest on it as their pivotal citation', '条以它为关键引文')) +
     k(res.counts.docs, GC.t('guidelines involved', '涉及指南数')) + '</div>';
   if (!res.citing.length) {
     body.innerHTML = '<p class="muted">' + GC.t('No citing recommendations in the resolved index.', '已定名索引中无引用它的推荐。') + '</p>';
@@ -66,7 +66,7 @@ function render(res) {
       return '<tr><td><b><a href="explorer.html?item=' + GC.esc(r.rec) + '">' + GC.esc(r.rec) + '</a></b></td>' +
         '<td>' + GC.esc(r.guideline || '') + (r.year ? ' (' + r.year + ')' : '') + '</td>' +
         '<td>' + GC.dirHTML(r.direction) + '</td><td>' + GC.esc(r.tier || '—') + '</td>' +
-        '<td>' + (r.pivotal ? '<span class="chip bad">' + GC.t('PIVOTAL', '关键研究') + '</span>' : '') + '</td></tr>';
+        '<td>' + (r.pivotal ? '<span class="chip bad">' + GC.t('PIVOTAL CITATION', '关键引文') + '</span>' : '') + '</td></tr>';
     }).join('') + '</tbody></table>';
 }
 function fallback() {

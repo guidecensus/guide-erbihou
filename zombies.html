@@ -11,8 +11,8 @@
 <main>
   <p class="tag" data-en="Layer 5 · Zombie watch" data-zh="第五层 · 僵尸观察">Layer 5 · Zombie watch</p>
   <h1 data-en="Zombie citations, adjudicated at the cited version" data-zh="僵尸引文：按被引版本裁定">Zombie citations, adjudicated at the cited version</h1>
-  <p class="lede" data-en="A zombie citation is a study that had already been withdrawn or retracted when the guideline citing it was published — yet still sits in its reference list. Screened at the level of the exact version each guideline cites, no current pivotal study is a confirmed zombie: the two determinations the frozen screen had counted attach to withdrawn updated versions that the guidelines never cited, and both were withdrawn under Amendment v2.7 (2026-11-15). Three strata were screened separately and are never pooled; every withdrawn determination is part of the record below."
-     data-zh="僵尸引文，是在引用它的指南出版之时就已经被撤回或撤稿的研究——却仍然躺在参考文献表里。按指南实际引用的确切版本筛查，现行关键研究中确认的僵尸为 0：冻结筛查曾计得的两例认定，附着于指南从未引用的已撤回更新版，已于 2026 年 11 月 15 日依修正案 v2.7 撤销。三个分层分别筛查、永不合并；每一例被撤销的认定都是下方记录的一部分。">A zombie citation is a study already withdrawn or retracted when the citing guideline was published; adjudicated at the cited version, no current pivotal study is a confirmed zombie.</p>
+  <p class="lede" data-en="A zombie citation is a study that had already been withdrawn or retracted when the guideline citing it was published — yet still sits in its reference list. Screened at the level of the exact version each guideline cites, there is no confirmed zombie pivotal citation among the 588 cited pivotal records screened (PMID coverage 745/759 pivotal-citation-bearing items, 98.2%); the screen covered 4,382 of the citation index's 6,942 unique PMIDs (63.1%), and 223 screened PMIDs \u2014 largely from an earlier title-based resolution pass, including the expression-of-concern notice record itself \u2014 do not appear in the index. The two determinations the frozen screen had counted attach to withdrawn updated versions that the guidelines never cited, and both were withdrawn under Amendment v2.7 (2026-11-15). Three strata were screened separately and are never pooled; every withdrawn determination is part of the record below."
+     data-zh="僵尸引文，是在引用它的指南出版之时就已经被撤回或撤稿的研究——却仍然躺在参考文献表里。按指南实际引用的确切版本筛查，在筛查的 588 条被引关键记录中，确认的僵尸关键引文为 0（PMID 覆盖 745/759 条带关键引文条目，98.2%）；本筛查覆盖引文索引 6,942 个独立 PMID 中的 4,382 个（63.1%），另有 223 个受筛 PMID——大多来自较早的按题名定名轮次，包括关注声明通知记录本身——不在索引中。冻结筛查曾计得的两例认定，附着于指南从未引用的已撤回更新版，已于 2026 年 11 月 15 日依修正案 v2.7 撤销。三个分层分别筛查、永不合并；每一例被撤销的认定都是下方记录的一部分。">A zombie citation is a study already withdrawn or retracted when the citing guideline was published; adjudicated at the cited version, there is no confirmed zombie pivotal citation among the 588 cited pivotal records screened (PMID coverage 745/759 pivotal-citation-bearing items, 98.2%); the screen covered 4,382 of the citation index's 6,942 unique PMIDs (63.1%), and 223 screened PMIDs \u2014 largely from an earlier title-based resolution pass, including the expression-of-concern notice record itself \u2014 do not appear in the index.</p>
   <div id="zombie-list"></div>
   <h2 data-en="Screening denominators" data-zh="筛查分母">Screening denominators</h2>
   <div id="screen"></div>
@@ -26,9 +26,9 @@ function render() {
   Z.stratum_b.forEach(function (z) {
     var title = z.title || GC.t('Cochrane review — the PubMed / Europe PMC record title is prefixed \u201cWITHDRAWN:\u201d', 'Cochrane 综述——PubMed / Europe PMC 记录标题以「WITHDRAWN:」为前缀');
     h += '<div class="card" style="margin:12px 0;border-color:var(--bad)">' +
-      '<p class="tag" style="color:var(--bad)">' + GC.t('Zombie pivotal', '僵尸关键研究') + '</p>' +
+      '<p class="tag" style="color:var(--bad)">' + GC.t('Zombie pivotal citation', '僵尸关键引文') + '</p>' +
       '<h3 style="margin:4px 0">' + GC.esc(title) + '</h3>' +
-      '<p class="small">' + GC.t('Pivotal study of ', '关键研究属于 ') + '<b>' + GC.esc(z.rec) + '</b>' +
+      '<p class="small">' + GC.t('Pivotal citation of ', '关键引文属于 ') + '<b>' + GC.esc(z.rec) + '</b>' +
       GC.t(' (guideline year ', '（指南年份 ') + z.guideline_year + ') · ' +
       '<a href="https://pubmed.ncbi.nlm.nih.gov/' + z.pmid + '/" target="_blank" rel="noopener">PMID ' + z.pmid + '</a></p>' +
       '<p class="small">' + GC.t('Withdrawn ', '撤回于 ') + GC.esc(z.notice_date) + ' · ' + GC.esc(z.evidence) + '</p></div>';
@@ -52,10 +52,10 @@ function render() {
   });
   document.getElementById('zombie-list').innerHTML = h;
   document.getElementById('screen').innerHTML = '<table><tbody>' +
-    '<tr><th>' + GC.t('Stratum (b): unique current pivotals screened', '分层（b)：筛查的现行关键研究（独立 PMID）') + '</th><td class="num">' + Z.stratum_b_screened + '</td><td>' + GC.t(Z.stratum_b.length + ' zombie pivotals confirmed at cited-version level; a further 25 pivotal identities could not be resolved and are reported as unresolved, never guessed', '按被引版本口径确认僵尸关键研究 ' + Z.stratum_b.length + ' 例；另有 25 例关键研究身份无法定出，按未决报告，绝不猜测') + '</td></tr>' +
+    '<tr><th>' + GC.t('Stratum (b): unique current pivotal citations screened', '分层（b)：筛查的现行关键引文（独立 PMID）') + '</th><td class="num">' + Z.stratum_b_screened + '</td><td>' + GC.t(Z.stratum_b.length + ' zombie pivotal citations confirmed at cited-version level among the 588 cited pivotal records screened (PMID coverage 745/759 pivotal-citation-bearing items, 98.2%); a further 25 pivotal-citation identities could not be resolved and are reported as unresolved, never guessed', '按被引版本口径确认僵尸关键引文 ' + Z.stratum_b.length + ' 例；另有 25 例关键引文身份无法定出，按未决报告，绝不猜测') + '</td></tr>' +
     '<tr><th>' + GC.t('Stratum (a): citations persistent across versions', '分层（a)：跨版本存续的引文') + '</th><td class="num">' + Z.stratum_a.screened.toLocaleString() + '</td><td>' + GC.t(Z.stratum_a.zombies + ' zombies', Z.stratum_a.zombies + ' 例僵尸') + '</td></tr>' +
     '<tr><th>' + GC.t('Stratum (c): flagged attachments (above)', '分层（c)：被标记附件（见上）') + '</th><td class="num">' + Z.stratum_c.length + '</td><td>' + GC.t('1 retracted + 1 expression of concern (not a zombie)', '1 例撤稿 + 1 例关注声明（非僵尸）') + '</td></tr>' +
-    '</tbody></table><p class="small muted">' + GC.t('Source: ', '来源：') + GC.esc(Z.source) + '</p>';
+    '</tbody></table><p class="small muted">' + GC.t('Scope of the screen: ' + 'no confirmed zombie pivotal citation among the 588 cited pivotal records screened (PMID coverage 745/759 pivotal-citation-bearing items, 98.2%); the screen covered 4,382 of the citation index\'s 6,942 unique PMIDs (63.1%), and 223 screened PMIDs \u2014 largely from an earlier title-based resolution pass, including the expression-of-concern notice record itself \u2014 do not appear in the index', '筛查范围：在筛查的 588 条被引关键记录中，确认的僵尸关键引文为 0（PMID 覆盖 745/759 条带关键引文条目，98.2%）；本筛查覆盖引文索引 6,942 个独立 PMID 中的 4,382 个（63.1%），另有 223 个受筛 PMID——大多来自较早的按题名定名轮次，包括关注声明通知记录本身——不在索引中') + '</p><p class="small muted">' + GC.t('Source: ', '来源：') + GC.esc(Z.source) + '</p>';
 }
 GC.load('zombies.json').then(function (d) { Z = d; render(); });
 window.onLangChange = render;

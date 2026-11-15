@@ -11,8 +11,8 @@
 <main>
   <p class="tag" data-en="Cross-layer · Disease panorama" data-zh="跨层 · 病种全景">Cross-layer · Disease panorama</p>
   <h1 data-en="The evidence landscape, disease by disease" data-zh="按病种看证据全景">The evidence landscape, disease by disease</h1>
-  <p class="lede" data-en="The five layers of this census are organised by guideline; clinicians think by disease. This page re-slices everything by the twenty disease areas of the Layer-4 question universe: for each area, the questions asked, the current recommendations that answer them, how fragile their pivotal evidence is, and whether the latest revisions flipped or dropped anything."
-     data-zh="本普查的五层按指南组织；临床医生按病种思考。本页把一切按第四层问题宇宙的二十个病种领域重新切片：每个领域问了哪些问题、现行推荐如何作答、其关键证据有多脆弱、以及最近的修订有没有翻转或删掉什么。">The census re-sliced by the twenty disease areas of the question universe.</p>
+  <p class="lede" data-en="The five layers of this census are organised by guideline; clinicians think by disease. This page re-slices everything by the twenty disease areas of the Layer-4 question universe: for each area, the questions asked, the current recommendations that answer them, how exposed their pivotal-citation evidence is (small-sample or single-trial exposure), and whether the latest revisions flipped or dropped anything."
+     data-zh="本普查的五层按指南组织；临床医生按病种思考。本页把一切按第四层问题宇宙的二十个病种领域重新切片：每个领域问了哪些问题、现行推荐如何作答、其关键引文证据的小样本或单试验暴露程度、以及最近的修订有没有翻转或删掉什么。">The census re-sliced by the twenty disease areas of the question universe.</p>
   <div class="filters" style="align-items:center"><span class="small muted" data-en="Disease area:" data-zh="病种领域：">Disease area:</span><span id="chips"></span></div>
   <div id="out"></div>
 </main>
@@ -48,7 +48,7 @@ function render() {
     tile(a.n_questions, GC.t('union clinical questions', '并集临床问题')) +
     tile(a.n_items, GC.t('current recommendations answering them', '作答这些问题的现行推荐')) +
     tile(a.n_docs, GC.t('guidelines involved', '涉及的指南')) +
-    tile(a.fragile_n, GC.t('fragile pivotal evidence (thin ice)', '关键证据脆弱（薄冰）')) +
+    tile(a.fragile_n, GC.t('pivotal-citation evidence with small-sample or single-trial exposure', '关键引文证据具小样本或单试验暴露')) +
     tile(a.single_coverage_questions, GC.t('questions answered by a single guideline', '只有一部指南作答的问题')) +
     '</div>';
   if (a.unjoined_n) {
@@ -58,7 +58,7 @@ function render() {
   }
   var dc = a.direction_counts, designs = a.pivotal_design_counts;
   h += '<div class="grid2"><div class="chartbox"><h3>' + GC.t('Direction of current recommendations', '现行推荐的方向') + '</h3><div id="ch-dir"></div></div>' +
-    '<div class="chartbox"><h3>' + GC.t('Pivotal-study design', '关键研究的设计类型') + '</h3><div id="ch-des"></div></div></div>';
+    '<div class="chartbox"><h3>' + GC.t('Pivotal-study design', '关键引文的设计类型') + '</h3><div id="ch-des"></div></div></div>';
   h += '<p>' + GC.t('Version changes touching this area: ', '触及本领域的版本变更：') +
     '<b>' + a.flips_n + '</b> ' + GC.t('direction flips, ', '次方向翻转、') +
     '<b>' + a.dropped_n + '</b> ' + GC.t('dropped recommendations — ', '条被删除的推荐——') +
@@ -71,7 +71,7 @@ function render() {
         return '<tr><td class="mono"><a href="explorer.html?item=' + GC.esc(i.rec) + '">' + GC.esc(i.rec) + '</a></td>' +
           '<td>' + GC.esc(i.guideline) + ' (' + i.year + ')</td><td>' + GC.dirHTML(i.direction) + '</td>' +
           '<td>' + GC.esc(i.tier || '—') + '</td>' +
-          '<td>' + (i.fragile ? '<span class="chip bad">' + GC.t('Fragile', '脆弱') + '</span>' : '') + '</td></tr>';
+          '<td>' + (i.fragile ? '<span class="chip bad">' + GC.t('Exposed', '暴露') + '</span>' : '') + '</td></tr>';
       }).join('') + '</tbody></table>';
   } else {
     h += '<div class="note">' + GC.t(
@@ -93,7 +93,7 @@ function render() {
   var order = ['SR/MA', 'RCT', 'primary', 'none'];
   var dkeys = order.filter(function (k) { return designs[k]; })
     .concat(Object.keys(designs).filter(function (k) { return order.indexOf(k) < 0; }));
-  var labels = { 'SR/MA': 'SR/MA', 'RCT': 'RCT', 'primary': GC.t('Primary study', '原始研究'), 'none': GC.t('No pivotal', '无关键研究') };
+  var labels = { 'SR/MA': 'SR/MA', 'RCT': 'RCT', 'primary': GC.t('Primary study', '原始研究'), 'none': GC.t('No pivotal citation', '无关键引文') };
   GC.barChart(document.getElementById('ch-des'), dkeys.map(function (k) {
     return { label: labels[k] || k, value: designs[k], display: String(designs[k]), color: '#9c6b24' };
   }), { labelWidth: 120 });

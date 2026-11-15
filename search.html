@@ -61,7 +61,7 @@ function render(res, src) {
         (meta ? '<div class="meta">' + GC.esc(meta) + '</div>' : '') +
         '<div><span class="chip layer">' + GC.esc(c.design || '') + '</span><span class="chip acc">PMID ' + GC.esc(c.pmid) + '</span></div>' +
         '<div class="counts">' + GC.t('Cited by ', '被引用于 ') + '<b>' + (c.n_cites != null ? c.n_cites : (c.cites || []).length) + '</b>' + GC.t(' recommendations', ' 条推荐') +
-        (c.n_pivotal ? GC.t('; pivotal for ', '；为其中 ') + '<b>' + c.n_pivotal + '</b>' : '') + '</div></div>';
+        (c.n_pivotal ? GC.t('; pivotal citation for ', '；为其中 ') + '<b>' + c.n_pivotal + '</b>' : '') + '</div></div>';
     }).join('') + capNote(res.citations.length);
   }
   if (res.questions.length) {

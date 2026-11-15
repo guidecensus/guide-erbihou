@@ -35,8 +35,8 @@
   <pre class="mono" style="white-space:pre-wrap;background:var(--chip);padding:10px 12px;border-radius:8px">{"items":805,"questions":905,"citations":4511,"links":6463}</pre>
 
   <h3><span class="chip acc">GET</span> <span class="mono">/v1/by-pmid?pmid=</span></h3>
-  <p data-en="Reverse lookup: the resolved bibliographic record for one PMID, plus every recommendation that cites it — flagged where the study is the recommendation's pivotal study."
-     data-zh="反查：一个 PMID 的已定名书目记录，加上引用它的全部推荐——并标出以它为关键研究的推荐。">Reverse lookup for one PMID.</p>
+  <p data-en="Reverse lookup: the resolved bibliographic record for one PMID, plus every recommendation that cites it — flagged where the study is the recommendation's pivotal citation."
+     data-zh="反查：一个 PMID 的已定名书目记录，加上引用它的全部推荐——并标出以它为关键引文的推荐。">Reverse lookup for one PMID.</p>
   <p class="small muted" data-en="Parameter: pmid (required)." data-zh="参数：pmid（必填）。">Parameter: pmid (required).</p>
   <p class="small"><a href="https://guide-api.erbihou.org/v1/by-pmid?pmid=28493631" target="_blank" rel="noopener">https://guide-api.erbihou.org/v1/by-pmid?pmid=28493631</a></p>
   <pre class="mono" style="white-space:pre-wrap;background:var(--chip);padding:10px 12px;border-radius:8px">{"pmid":"28493631","citation":{"pmid":"28493631","title":"Allergen immunotherapy for allergic rhinoconjunctivitis: A systematic review and meta-analysis.","author":"Dhami S","year":2017,"journal":"Allergy","design":"SR/MA","cites":["AAO2024AIT-KAS01","AAO2024AIT-KAS05","AAO2024AIT-KAS12",…],"pivotal_for":["AAO2024AIT-KAS01","EAACI2018-01","EAACI2018-02",…],"n_cites":51,"n_pivotal":42},"citing":[{"rec":"AAO2024AIT-KAS01","pivotal":true},{"rec":"AAO2024AIT-KAS05","pivotal":false},{"rec":"AAO2024AIT-KAS12","pivotal":false},…]}</pre>
@@ -51,8 +51,8 @@
   <p class="small muted" data-en="Excerpt — the result list is capped at 200 (count is the returned length)." data-zh="节选——结果列表上限 200 条（count 为返回长度）。">Excerpt.</p>
 
   <h3><span class="chip acc">GET</span> <span class="mono">/v1/item?id=</span></h3>
-  <p data-en="One recommendation record in full, with all of its resolved citation links (pivotal study first)."
-     data-zh="一条推荐的完整记录，附其全部已定名引文关联（关键研究在前）。">One recommendation record with its citation links.</p>
+  <p data-en="One recommendation record in full, with all of its resolved citation links (pivotal citation first)."
+     data-zh="一条推荐的完整记录，附其全部已定名引文关联（关键引文在前）。">One recommendation record with its citation links.</p>
   <p class="small muted" data-en="Parameter: id — the recommendation ID, e.g. AAO2024AIT-KAS01." data-zh="参数：id——推荐编号，如 AAO2024AIT-KAS01。">Parameter: id.</p>
   <p class="small"><a href="https://guide-api.erbihou.org/v1/item?id=AAO2024AIT-KAS01" target="_blank" rel="noopener">https://guide-api.erbihou.org/v1/item?id=AAO2024AIT-KAS01</a></p>
   <pre class="mono" style="white-space:pre-wrap;background:var(--chip);padding:10px 12px;border-radius:8px">{"item":{"rec":"AAO2024AIT-KAS01","doc":"AAO2024AIT","guideline":"Allergen Immunotherapy for Inhalant Allergy","society":"AAO-HNSF","year":2024,"statement":"Clinicians should offer or refer to a clinician who can offer AIT for patients with AR with or without AA if t…","direction":"for","tier":"Recommendation","grade":"Grade A","pivotal_design":"SR/MA","pivotal_pmid":"28493631","U":"U1","S":"M",…},"citations":[{"pmid":"28493631","pivotal":true,"title":"Allergen immunotherapy for allergic rhinoconjunctivitis: A systematic review and meta-analysis.","author":"Dhami S","year":2017,"journal":"Allergy","design":"SR/MA"},{"pmid":"23557834","pivotal":false,"title":"Subcutaneous and sublingual immunotherapy for seasonal allergic rhinitis: a systematic review and indirect comparison.","author":"Dretzke J","year":2013,"journal":"J Allergy Clin Immunol","design":"SR/MA"},…]}</pre>
@@ -82,8 +82,8 @@
   <p class="small muted" data-en="Excerpt — real response to q=immunotherapy, arrays trimmed to their first record." data-zh="节选——q=immunotherapy 的真实响应，数组截短至首条。">Excerpt.</p>
 
   <h3><span class="chip acc">GET</span> <span class="mono">/v1/citation?pmid=</span> <span class="chip warn">v2</span></h3>
-  <p data-en="The dossier behind the citation page: the bibliographic record, every citing recommendation with its guideline, year, direction and stated tier, and the counts of citing / pivotal-for / guidelines."
-     data-zh="文献档案页背后的接口：书目记录、每条引用推荐及其指南、年份、方向与原文等级，以及被引数 / 关键于数 / 涉及指南数。">The citation dossier.</p>
+  <p data-en="The dossier behind the citation page: the bibliographic record, every citing recommendation with its guideline, year, direction and stated tier, and the counts of citing / pivotal-citation-for / guidelines."
+     data-zh="文献档案页背后的接口：书目记录、每条引用推荐及其指南、年份、方向与原文等级，以及被引数 / 作关键引文数 / 涉及指南数。">The citation dossier.</p>
   <p class="small muted" data-en="Parameter: pmid (required)." data-zh="参数：pmid（必填）。">Parameter: pmid.</p>
   <p class="small"><span class="mono">https://guide-api.erbihou.org/v1/citation?pmid=28493631</span></p>
   <pre class="mono" style="white-space:pre-wrap;background:var(--chip);padding:10px 12px;border-radius:8px">{"citation":{"pmid":"28493631","title":"Allergen immunotherapy for allergic rhinoconjunctivitis: A systematic review and meta-analysis.",…},"citing":[{"rec":"AAO2024AIT-KAS01","doc":"AAO2024AIT","guideline":"Allergen Immunotherapy for Inhalant Allergy","year":2024,"direction":"for","tier":"Recommendation","pivotal":true},…],"counts":{"cites":51,"pivotal":42,"docs":3}}</pre>

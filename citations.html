@@ -11,8 +11,8 @@
 <main>
   <p class="tag" data-en="Layer 3 · Citation forward search" data-zh="第三层 · 引文正查">Layer 3 · Citation forward search</p>
   <h1 data-en="Find a study by title, author or year" data-zh="按题名、作者或年份找一篇研究">Find a study by title, author or year</h1>
-  <p class="lede" data-en="The reverse of the PMID lookup: start from a study you half-remember — a title fragment, the first author, a year — and land on its PubMed ID, its design class, and the recommendations that cite it or rest on it as their pivotal study. Every hit deep-links into the recommendations explorer."
-     data-zh="PMID 反查的另一面：从一篇你只记得大概的研究出发——题名片段、第一作者、年份——落到它的 PubMed 编号、设计类别，以及引用它或以它为关键研究的推荐。每条结果都深链到推荐浏览器。">Search the resolved citation index by title fragment, first author or year.</p>
+  <p class="lede" data-en="The reverse of the PMID lookup: start from a study you half-remember — a title fragment, the first author, a year — and land on its PubMed ID, its design class, and the recommendations that cite it or rest on it as their pivotal citation. Every hit deep-links into the recommendations explorer."
+     data-zh="PMID 反查的另一面：从一篇你只记得大概的研究出发——题名片段、第一作者、年份——落到它的 PubMed 编号、设计类别，以及引用它或以它为关键引文的推荐。每条结果都深链到推荐浏览器。">Search the resolved citation index by title fragment, first author or year.</p>
   <div id="coverage"></div>
   <div class="filters">
     <label><span data-en="Title / author / journal" data-zh="题名 / 作者 / 期刊">Title / author / journal</span>
@@ -32,7 +32,7 @@
       <option value="yasc" data-en="Oldest first" data-zh="最早在前">Oldest first</option>
     </select></label>
     <label style="flex-direction:row;align-items:center;gap:6px"><input type="checkbox" id="f-pivonly">
-      <span data-en="Pivotal for ≥1 recommendation only" data-zh="仅看至少为一条推荐之关键研究者">Pivotal for ≥1 recommendation only</span></label>
+      <span data-en="Pivotal citation for ≥1 recommendation only" data-zh="仅看至少为一条推荐之关键引文者">Pivotal for ≥1 recommendation only</span></label>
   </div>
   <p class="small muted" id="count"></p>
   <div id="list"></div>
@@ -53,7 +53,7 @@ function citHTML(c) {
   c.pivotal_for.forEach(function (r) { piv[r] = 1; });
   var citing = c.cites.map(function (r) {
     return '<div style="margin:3px 0"><a href="explorer.html?item=' + GC.esc(r) + '"><b>' + GC.esc(r) + '</b></a>' +
-      (piv[r] ? ' <span class="chip bad">' + GC.t('PIVOTAL', '关键研究') + '</span>' : '') + '</div>';
+      (piv[r] ? ' <span class="chip bad">' + GC.t('PIVOTAL CITATION', '关键引文') + '</span>' : '') + '</div>';
   }).join('');
   return '<div class="citrow">' +
     '<div class="ttl"><a href="citation.html?pmid=' + c.pmid + '">' +
@@ -63,7 +63,7 @@ function citHTML(c) {
       '<span class="chip acc">PMID ' + c.pmid + '</span>' +
       '<a class="small" href="lookup.html?pmid=' + c.pmid + '">' + GC.t('Reverse view', '反查视图') + '</a></div>' +
     '<div class="counts">' + GC.t('Cited by ', '被引用于 ') + '<b>' + c.n_cites + '</b>' + GC.t(' recommendations', ' 条推荐') +
-      (c.n_pivotal ? GC.t('; pivotal for ', '；为其中 ') + '<b>' + c.n_pivotal + '</b>' : '') + '</div>' +
+      (c.n_pivotal ? GC.t('; pivotal citation for ', '；为其中 ') + '<b>' + c.n_pivotal + '</b>' : '') + '</div>' +
     (c.cites.length ? '<details><summary>' + GC.t('Show the citing recommendations', '展开引用它的推荐') + '</summary>' + citing + '</details>' : '') +
     '</div>';
 }

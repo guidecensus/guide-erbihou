@@ -11,8 +11,8 @@
 <main>
   <p class="tag" data-en="Layer 4 · Deep dive" data-zh="第四层 · 深挖">Layer 4 · Deep dive</p>
   <h1 data-en="The 27 pairs where guidelines point in opposite directions" data-zh="27 对方向相反的指南配对">The 27 pairs where guidelines point in opposite directions</h1>
-  <p class="lede" data-en="Of the 221 aligned pairs where both guidelines take a stance on the same (partially overlapping) question, 27 disagree on direction. They cluster on just 9 clinical questions — and in every resolvable case the two sides rest on different pivotal studies."
-     data-zh="在 221 对双方均对同一（部分重叠）问题表态的对齐配对中，27 对方向不一致。它们只集中在 9 个临床问题上——而且在每一个可定出关键研究的案例中，两边站的都是不同的关键研究。">Of the aligned pairs where both guidelines take a stance, 27 disagree on direction.</p>
+  <p class="lede" data-en="Of the 221 aligned pairs where both guidelines take a stance on the same (partially overlapping) question, 27 disagree on direction. They cluster on just 9 clinical questions — and in every resolvable case the two sides rest on different pivotal citations."
+     data-zh="在 221 对双方均对同一（部分重叠）问题表态的对齐配对中，27 对方向不一致。它们只集中在 9 个临床问题上——而且在每一个可定出关键引文的案例中，两边站的都是不同的关键引文。">Of the aligned pairs where both guidelines take a stance, 27 disagree on direction.</p>
   <div class="filters">
     <label><span data-en="Pair cluster (shared items)" data-zh="配对簇（共享条目）">Pair cluster (shared items)</span><select id="f-q"></select></label>
   </div>
@@ -40,7 +40,7 @@ function sideHTML(s) {
     (s.intervention ? '<p class="small"><b>' + GC.t('Intervention: ', '干预：') + '</b>' + GC.esc(s.intervention) + '</p>' : '') +
     (s.population ? '<p class="small"><b>' + GC.t('Population: ', '人群：') + '</b>' + GC.esc(s.population) + '</p>' : '') +
     '<p class="small muted">' + GC.t('Tier ', '等级 ') + GC.esc(s.U || '—') + ' · ' + GC.t('Strength ', '强度 ') + GC.esc(s.S || '—') +
-    ' · ' + GC.t('Pivotal: ', '关键研究：') + GC.esc(s.piv_design || '—') + (s.piv_n ? ' · N=' + GC.esc(s.piv_n) : '') + '</p></div>';
+    ' · ' + GC.t('Pivotal citation: ', '关键引文：') + GC.esc(s.piv_design || '—') + (s.piv_n ? ' · N=' + GC.esc(s.piv_n) : '') + '</p></div>';
 }
 function buildClusters() {
   // Connected components over the pair graph: pairs sharing an item form one
@@ -103,7 +103,7 @@ function render() {
   document.getElementById('list').innerHTML = rows.map(function (p) {
     return '<div style="margin:22px 0"><p class="small muted" style="margin:0 0 6px">' +
       GC.t('Partial overlap', '部分重叠') + ' · ' + GC.t('guideline years ', '指南年份 ') + GC.esc(p.pair.split(' x ')[0].slice(3, 7)) +
-      (p.shared_pivotal === 'False' ? ' · ' + GC.t('the two sides rest on different pivotal studies', '双方关键研究不同') : '') + '</p>' +
+      (p.shared_pivotal === 'False' ? ' · ' + GC.t('the two sides rest on different pivotal citations', '双方关键引文不同') : '') + '</p>' +
       '<div class="vs">' + sideHTML(p.a) + '<div class="mid">≠</div>' + sideHTML(p.b) + '</div></div>';
   }).join('') || '<p class="muted">' + GC.t('No pairs in this cluster.', '该簇无配对。') + '</p>';
 }
